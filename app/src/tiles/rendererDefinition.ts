@@ -81,10 +81,12 @@ function renderTile(tileParams: TileParams, dataParams: any): Promise<Tile> {
         // otherwise tile would be generated and not cached
 
         // also, tiles outside EXTENT_BBOX are not to be produced
+        console.log("creating blank tile (isOutsideExtent)")
         return createBlankTile();
     }
 
     if (tileParams.tileset === 'highlight') {
+        console.log("renderBuildingTile called")
         return renderBuildingTile(tileParams, dataParams);
     }
 
