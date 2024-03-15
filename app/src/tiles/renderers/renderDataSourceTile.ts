@@ -60,6 +60,7 @@ async function renderDataSourceTile(
     const im = new mapnik.Image(map.width, map.height);
     map.extent = bbox;
     const rendered = await promisify(map.render.bind(map))(im, { variables: vars});
+    console.log("renderDataSourceTile called" + tileset + z.toString() + x + y)
 
     return await promisify(rendered.encode.bind(rendered))('png');
 }
