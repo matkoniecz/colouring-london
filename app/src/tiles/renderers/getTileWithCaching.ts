@@ -3,11 +3,13 @@ import { RendererFunction, Tile, TileParams } from "../types";
 
 
 async function getTileWithCaching(tileParams: TileParams, dataParams: any, tileCache: TileCache, renderTile: RendererFunction): Promise<Tile> {
+    console.log(" getTileWithCaching called tileParams: " + tileParams + "dataParams: " + dataParams)
     try {
+        console.log(" getTileWithCaching tries using cache")
         const tile = await tileCache.get(tileParams);
-        console.log(" getTileWithCaching called tileParams: " + tileParams + "dataParams: " + dataParams)
         return tile;
     } catch (err) {
+        console.log(" getTileWithCaching - cache failed, will render tile")
         const im = await renderTile(tileParams, dataParams);
         try {
             await tileCache.put(im, tileParams);
